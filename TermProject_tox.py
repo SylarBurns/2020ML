@@ -41,14 +41,14 @@ x_normalized = (x_data-mu)/sigma
 x_ts_normalized = (x_data_ts-mu)/sigma
 
 for epoch in range(1000):
-    y_pred = model(x_data.float())
+    y_pred = model(x_normalized.float())
     loss = criterion(y_pred, y_data.float())
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
     
 print(f'Loss: {loss.item()}')
-y_pred_ts = model(x_data_ts.float())
+y_pred_ts = model(x_ts_normalized.float())
 loss_ts = criterion(y_pred_ts, y_data_ts.float())
 print(f'Testing Result | Loss: {loss_ts.item()} ')
 plt.scatter(y_data_ts.detach().numpy(), y_pred_ts.detach().numpy())
